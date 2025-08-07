@@ -2,7 +2,7 @@ from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal
 from app.models import User
-from app.utils.access import user_has_permission
+from app.utils.rules import user_has_permission
 
 def get_db():
     db = SessionLocal()
