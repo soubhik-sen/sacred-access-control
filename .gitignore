@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.*.py
+*.sqlite3
+*.db
+
+# Virtualenv
+venv/
+.env
+
+# IDE/editor configs
+.vscode/
+.idea/
+
+# Alembic
+migrations/
