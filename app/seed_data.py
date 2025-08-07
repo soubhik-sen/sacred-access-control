@@ -1,5 +1,8 @@
 from sqlalchemy.orm import Session
 from app.models import User, Role, Permission, UserRegion, UserDepartment
+from passlib.context import CryptContext
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def seed_database(db: Session):
     # Create permissions
@@ -18,9 +21,23 @@ def seed_database(db: Session):
     db.add_all([admin_role, viewer_role])
     db.commit()
 
-    # Create users
-    u1 = User(is_active=True, clearance_level=5)
-    u2 = User(is_active=True, clearance_level=2)
+# Add inside seed_database()
+    pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
+    u1 = User(
+    username="admin",
+    hashed_password=pwd_context.hash("admin123"),
+    is_active=True,
+    clearance_level=5
+    )
+
+    u2 = User(
+    username="viewer",
+    hashed_password=pwd_context.hash("viewer123"),
+    is_active=True,
+    clearance_level=2
+    )
+
 
     # Assign roles
     u1.roles.append(admin_role)
