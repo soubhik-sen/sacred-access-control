@@ -31,3 +31,7 @@ def generate_token_for_testing(user_id: int = Form(...)):
     token = create_access_token({"sub": str(user_id)})
     return JSONResponse({"access_token": token, "token_type": "bearer"})
 
+if __name__ == "__main__":
+    import uvicorn
+    import os
+    uvicorn.run("app.main:app", host="0.0.0.0", port=int(os.environ.get("PORT", 8000)))
