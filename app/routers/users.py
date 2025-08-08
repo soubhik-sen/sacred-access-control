@@ -43,11 +43,11 @@ def list_users(db: Session = Depends(get_db),
     return [
         {
             "id": u.id,
-            "username": u.username,
-            "role": u.role.name if u.role else None,
-            "attributes": [{ "key": a.key, "value": a.value } for a in u.attributes],
-            "regions": [r.region for r in u.regions],
-            "departments": [d.department for d in u.departments]
+            "username": u.username
+            # "role": u.role.name if u.role else None,
+            # "attributes": [{ "key": a.key, "value": a.value } for a in u.attributes],
+            # "regions": [r.region for r in u.regions],
+            # "departments": [d.department for d in u.departments]
         }
         for u in users
     ]
