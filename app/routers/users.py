@@ -65,7 +65,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
         # "attributes": [{ "key": a.key, "value": a.value } for a in user.attributes]
     }
 
-@router.get("user_id", response_model=dict)
+@router.get("/user_id", response_model=dict)
 def get_user(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
