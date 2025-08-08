@@ -38,7 +38,7 @@ class UserCreate(BaseModel):
 
 @router.get("/", response_model=List[dict])
 def list_users(db: Session = Depends(get_db),
-                user = Depends(require_permission("view_users"))):
+                user = Depends(require_permission("view"))):
     users = db.query(User).all()
     return [
         {
