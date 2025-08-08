@@ -61,11 +61,21 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
     return {
         "id": user.id,
         "username": user.username,
-        "role": user.role.name if user.role else None,
-        "attributes": [{ "key": a.key, "value": a.value } for a in user.attributes]
+        # "role": user.role.name if user.role else None,
+        # "attributes": [{ "key": a.key, "value": a.value } for a in user.attributes]
     }
 
-
+@router.get("user_id", response_model=dict)
+def get_user(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(User).filter(User.id == user_id).first()
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    return {
+        "id": user.id,
+        "username": user.username
+        # "role": user.role.name if user.role else None,
+        # "attributes": [{ "key": a.key, "value": a.value } for a in user.attributes]
+    }
 
 @router.post("/", status_code=201)
 def create_user(payload: UserCreate, db: Session = Depends(get_db)):
