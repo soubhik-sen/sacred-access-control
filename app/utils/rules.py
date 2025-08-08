@@ -6,7 +6,7 @@ from typing import List
 
 def user_has_permission(user: User, action: str, resource: str) -> bool:
     return any(
-        perm.action == action and perm.resource == resource
+        perm.action == action or perm.resource == resource
         for role in user.roles
         for perm in role.permissions
     )
