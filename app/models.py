@@ -63,6 +63,7 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
+    username = Column(String, unique=True, index=True)
     is_active = Column(Boolean, default=True)
     clearance_level = Column(Integer, default=1)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
