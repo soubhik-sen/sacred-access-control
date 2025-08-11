@@ -29,7 +29,7 @@ class PermissionOut(BaseModel):
 # Routes
 # -----------------------------
 
-@router.get("/", response_model=List[PermissionOut])
+@router.get("/", response_model=List[dict])
 def list_permissions(db: Session = Depends(get_db)):
     return db.query(Permission).all()
 
