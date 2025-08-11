@@ -19,7 +19,8 @@ class PermissionCreate(BaseModel):
 
 class PermissionOut(BaseModel):
     id: int
-    name: str
+    action: str
+    resource: str
 
     class Config:
         orm_mode = True
@@ -29,7 +30,7 @@ class PermissionOut(BaseModel):
 # Routes
 # -----------------------------
 
-@router.get("/", response_model=List[dict])
+@router.get("/", response_model=List[PermissionOut])
 def list_permissions(db: Session = Depends(get_db)):
     return db.query(Permission).all()
 
