@@ -66,7 +66,7 @@ def get_user(user_id: int, db: Session = Depends(get_db)):
     }
 
 @router.get("/user_id", response_model=dict)
-def get_user(user_id: int, db: Session = Depends(get_db)):
+def get_userp(user_id: int, db: Session = Depends(get_db)):
     user = db.query(User).filter(User.id == user_id).first()
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
@@ -95,14 +95,14 @@ def create_user(payload: UserCreate, db: Session = Depends(get_db)):
             user_attr = UserAttribute(user_id=user.id, key=attr.key, value=attr.value)
             db.add(user_attr)
         # Regions
-    if payload.regions:
-        for region in payload.regions:
-            db.add(UserRegion(user_id=user.id, region=region.region))
+    # if payload.regions:
+    #     for region in payload.regions:
+    #        db.add(UserRegion(user_id=user.id, region=region.region))
 
-    # Departments
-    if payload.departments:
-        for dept in payload.departments:
-            db.add(UserDepartment(user_id=user.id, department=dept.department))  
+    # # Departments
+    # if payload.departments:
+    #     for dept in payload.departments:
+    #         db.add(UserDepartment(user_id=user.id, department=dept.department))  
 
     db.commit()
 
