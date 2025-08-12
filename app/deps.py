@@ -51,7 +51,7 @@ def require_permission(permission_name: str):
                 detail=f"User id {user_id} not found.",
             )
 
-        if not user_has_permission(user, permission_name, None):
+        if not user_has_permission(user, permission_name, ''):
             raise HTTPException(
                 status_code=status.HTTP_403_FORBIDDEN,
                 detail=f"Missing permission: {permission_name}",

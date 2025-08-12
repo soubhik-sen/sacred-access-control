@@ -33,15 +33,15 @@ class RoleOut(BaseModel):
 # Routes
 # -----------------------------
 
-@router.get("/", response_model=List[RoleOut])
+@router.get("/", response_model=List[dict])
 def list_roles(db: Session = Depends(get_db)):
     roles = db.query(Role).all()
     return [
-        RoleOut(
-            id=r.id,
-            name=r.name,
-            permissions=[p.name for p in r.permissions]
-        )
+        {
+            "id": r.id,
+            "name": r.name,
+            "permissions": [p.name for p in r.permissions]
+        }
         for r in roles
     ]
 
